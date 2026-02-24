@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, CityActivity.class);
                 startActivity(intent);
             }

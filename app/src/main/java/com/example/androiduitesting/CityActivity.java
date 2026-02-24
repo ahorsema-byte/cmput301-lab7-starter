@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ads_mobile_sdk.v7;
 
-public class CityActivity extends androidx.appcompat.app.AppCompatActivity {
+public class CityActivity extends AppCompatActivity {
     Button back_button;
 
     @Override
