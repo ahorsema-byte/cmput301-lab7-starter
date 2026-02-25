@@ -64,6 +64,37 @@ public class MainActivityTest {
     @Test
     public void testIntentSwitch(){
         onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        onView(withId(R.id.button_confirm)).perform(click());
 
+        onView(withId(R.id.city_list)).perform(click());
+
+        onView(withId(R.id.back_button)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testIntentCityName(){
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        onView(withId(R.id.city_list)).perform(click());
+
+        onView(withId(R.id.back_button)).check(matches(isDisplayed()));
+        onView(withText("Edmonton")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testBackButton(){
+        onView(withId(R.id.button_add)).perform(click());
+        onView(withId(R.id.editText_name)).perform(ViewActions.typeText("Edmonton"));
+        onView(withId(R.id.button_confirm)).perform(click());
+
+        onView(withId(R.id.city_list)).perform(click());
+
+        onView(withId(R.id.back_button)).perform(click());
+
+        onView(withId(R.id.back_button)).check(doesNotExist());
+        onView(withId(R.id.city_list)).check(matches(isDisplayed()));
     }
 }
