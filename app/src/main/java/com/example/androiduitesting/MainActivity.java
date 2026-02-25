@@ -26,7 +26,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            dataList = extras.getStringArrayList("DataList");
+        }
+        else {
+            dataList = new ArrayList<String>();
+        }
         nameField = findViewById(R.id.field_nameEntry);
         newName  = findViewById(R.id.editText_name);
 
@@ -34,12 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
         //String []cities ={"Edmonton", "Vancouver", "Moscow", "Sydney", "Berlin", "Vienna", "Tokyo", "Beijing", "Osaka", "New Delhi"};
 
-        dataList = new ArrayList<>();
 
         //dataList.addAll(Arrays.asList(cities));
 
         cityAdapter = new ArrayAdapter<>(this, R.layout.content, dataList);
-
 
         cityList.setAdapter(cityAdapter);
 
@@ -54,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String cityName = newName.getText().toString();
-                cityAdapter.add(cityName);
+                dataList.add(cityName);
+                cityAdapter.notifyDataSetChanged();
                 newName.getText().clear();
                 nameField.setVisibility(View.INVISIBLE);
             }
@@ -63,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         final Button deleteButton = findViewById(R.id.button_clear);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                cityAdapter.clear();
+                dataList.clear();
+                cityAdapter.notifyDataSetChanged();
             }
         });
 
@@ -71,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, CityActivity.class);
+                intent.putExtra("DataList", dataList);
+                intent.putExtra("index",position);
                 startActivity(intent);
             }
         });

@@ -59,6 +59,11 @@ public class MainActivityTest {
         onView(withId(R.id.button_confirm)).perform(click());
 
         onData(is(instanceOf(String.class))).inAdapterView(withId(R.id.city_list)).atPosition(0).check(matches((withText("Edmonton"))));
+    }
+
+    @Test
+    public void testIntentSwitch(){
+        onView(withId(R.id.button_add)).perform(click());
 
     }
 }
